@@ -2,8 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
-const userRoute = require("./routes/usersRoute");
-const articleRoute = require("./routes/articlesRoute");
+const usersRoute = require("./routes/usersRoute");
+const articlesRoute = require("./routes/articlesRoute");
 dotenv.config();
 
 const app = express();
@@ -19,8 +19,8 @@ try {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(userRoute);
-app.use(articleRoute);
+app.use(usersRoute);
+app.use(articlesRoute);
 
 app.listen(process.env.PORT, () => {
   console.log(`App listening on port: ${process.env.PORT}`);
