@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "chemicalstan",
+    "password": null,
+    "database": "sBlog",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "chemicalstan",
+    "password": null,
+    "database": "sBlog_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "chemicalstan",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
