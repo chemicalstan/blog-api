@@ -18,7 +18,7 @@ const empty = input => {
  * @param {object} next
  * @returns {object || error} next param | error
  */
-const createUserValidate = async (req, res, next) => {
+const UserPayloadValidate = async (req, res, next) => {
   const schema = Joi.object({
     name: Joi.string().required(),
     email: Joi.string()
@@ -36,7 +36,7 @@ const createUserValidate = async (req, res, next) => {
   }
 };
 
-const createArticleValidate = async (req, res, next) => {
+const ArticlePayloadValidate = async (req, res, next) => {
   const schema = Joi.object({
     title: Joi.string().required(),
     content: Joi.string().required(),
@@ -44,16 +44,16 @@ const createArticleValidate = async (req, res, next) => {
   });
 
   try {
-      const { title, content, userId } = req.body;
-      await schema.validateAsync({title, content, userId});
-      next();
+    const { title, content, userId } = req.body;
+    await schema.validateAsync({ title, content, userId });
+    next();
   } catch (error) {
-      errorMessage.error = error.details[0].message;
-      return res.status(status.bad).send(errorMessage);
+    errorMessage.error = error.details[0].message;
+    return res.status(status.bad).send(errorMessage);
   }
 };
 
 module.exports = {
-  createUserValidate,
-  createArticleValidate
+  UserPayloadValidate,
+  ArticlePayloadValidate
 };
