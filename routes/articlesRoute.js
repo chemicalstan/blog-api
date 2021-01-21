@@ -1,8 +1,12 @@
 const express = require('express');
 const route = express.Router();
-const { createArticle } = require('../controllers/articleController');
-const { createArticleValidate } = require('../middlewares/validations');
+const { createArticle, getAllArticles, getArticleById, updateArticle, deleteArticle } = require('../controllers/articleController');
+const { ArticlePayloadValidate } = require('../middlewares/validations');
 
-route.post('/articles', createArticleValidate, createArticle);
+route.get('/articles', getAllArticles);
+route.get('/articles/:id', getArticleById);
+route.post('/articles', ArticlePayloadValidate, createArticle);
+route.put('/articles/:id', ArticlePayloadValidate, updateArticle);
+route.delete('/articles/:id', deleteArticle);
 
 module.exports = route;

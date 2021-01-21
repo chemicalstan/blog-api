@@ -3,7 +3,7 @@ const User = db.User;
 const { successMessage, status, errorMessage } = require("../helpers/status");
 
 /**
- * Get all users
+ * Create users
  * @param {object} req
  * @param {object} res
  * @returns {object} reflection object

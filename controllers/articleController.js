@@ -32,14 +32,43 @@ const createArticle = async (req, res) => {
  * @param {object} res
  * @returns {array} Articles array
  */
-const getAllArticles = async (req, res) => {};
+const getAllArticles = async (req, res) => {
+  try {
+    const dbResponse = await Article.findAll();
+    if (!dbResponse[0]) {
+      errorMessage.error = "There are no articles";
+      return res.status(status.nocontent).send(errorMessage);
+    }
+    successMessage.data = dbResponse;
+    return res.status(status.success).send(successMessage);
+  } catch (error) {
+    errorMessage.error = `Could not get articles: ${error.message}`;
+    return res.status(status.notfound).send(errorMessage);
+  }
+};
 /**
  * Get article by id
  * @param {object} req
  * @param {object} res
  * @returns {object} article object
  */
-const getArticleById = async (req, res) => {};
+const getArticleById = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const dbResponse = await Article.findOne({
+      where: { id }
+    });
+    if (!dbResponse === true) {
+      errorMessage.error = "This article does not exist";
+      return res.status(status.notfound).send(errorMessage);
+    }
+    successMessage.data = dbResponse;
+    return res.status(status.success).send(successMessage);
+  } catch (error) {
+    errorMessage.error = `Could not get article: ${error.message}`;
+    return res.status(status.notfound).send(errorMessage);
+  }
+};
 
 /**
  * Update Article
