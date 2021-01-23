@@ -16,9 +16,7 @@ const createArticle = async (req, res) => {
       content,
       userId
     });
-    successMessage.success = "Article created";
-    successMessage.data = article;
-    return res.status(status["success"]).send(successMessage);
+    return res.status(status["success"]).json(article);
   } catch (error) {
     errorMessage.message = error.message;
     errorMessage.error = "article could not be created";
@@ -39,8 +37,7 @@ const getAllArticles = async (req, res) => {
       errorMessage.error = "There are no articles";
       return res.status(status.nocontent).send(errorMessage);
     }
-    successMessage.data = dbResponse;
-    return res.status(status.success).send(successMessage);
+    return res.status(status.success).json(dbResponse);
   } catch (error) {
     errorMessage.error = `Could not get articles: ${error.message}`;
     return res.status(status.notfound).send(errorMessage);
@@ -62,8 +59,7 @@ const getArticleById = async (req, res) => {
       errorMessage.error = "This article does not exist";
       return res.status(status.notfound).send(errorMessage);
     }
-    successMessage.data = dbResponse;
-    return res.status(status.success).send(successMessage);
+    return res.status(status.success).send(dbResponse);
   } catch (error) {
     errorMessage.error = `Could not get article: ${error.message}`;
     return res.status(status.notfound).send(errorMessage);
@@ -89,7 +85,7 @@ const updateArticle = async (req, res) => {
       return res.status(status.notfound).send(errorMessage);
     }
     successMessage.data = "Article updated";
-    return res.status(status.success).send(successMessage);
+    return res.status(status.success).send({data: updatedArticle[0]});
   } catch (error) {
     errorMessage.error = `Article could not be updated: ${error.message}`;
     return res.status(status.error).send(errorMessage);
@@ -110,8 +106,7 @@ const deleteArticle = async (req, res) => {
       errorMessage.error = "Article does not exist";
       return res.status(status.notfound).send(errorMessage);
     }
-    successMessage.data = "Article deleted";
-    return res.status(status.success).send(successMessage);
+    return res.status(status.success).send({data: dbResponse});
   } catch (error) {
     errorMessage.error = `Article could not be deleted: ${error.message}`;
     return res.status(status.error).send(errorMessage);

@@ -15,9 +15,7 @@ const createUser = async (req, res) => {
       name,
       email
     });
-    successMessage.message = "User created";
-    successMessage.data = user;
-    return res.status(status["success"]).send(successMessage);
+    return res.status(status.success).json({data: user});
   } catch (error) {
     errorMessage.error = error.message;
     errorMessage.message = "user could not be created";
@@ -34,8 +32,7 @@ const createUser = async (req, res) => {
 const getAllUsers = async (req, res) => {
   try {
     const users = await User.findAll();
-    successMessage.data = users;
-    return res.status(status.success).json(successMessage);
+    return res.status(status.success).json(users);
   } catch (error) {
     errorMessage.error = error.message;
     return res.status(status.error).send(errorMessage);
@@ -59,8 +56,7 @@ const getUserById = async (req, res) => {
       errorMessage.error = "This user does not exist";
       return res.status(status.notfound).send(errorMessage);
     }
-    successMessage.data = user;
-    return res.status(status.success).send(successMessage);
+    return res.status(status.success).json(user);
   } catch (error) {
     errorMessage.error = error.message;
     return res.status(status.error).send(errorMessage);
@@ -89,8 +85,7 @@ const updateUser = async (req, res) => {
       errorMessage.error = 'This user does not exist'
       return res.status(status.notfound).send(errorMessage)
     }
-    successMessage.data = 'User updated';
-    return res.status(status.success).send(successMessage);
+    return res.status(status.success).json({data: updatedUser[0]});
   } catch (error) {
     errorMessage.error = error.message;
     return res.status(status.error).send(errorMessage);
@@ -115,8 +110,7 @@ const deleteUser = async (req, res) => {
       errorMessage.error = 'This user does not exist';
       return res.status(status.notfound).send(errorMessage);
     }
-    successMessage.data = 'User deleted';
-    return res.status(status.success).send(successMessage)
+    return res.status(status.success).json({data: deletedUser})
   } catch (error) {
     errorMessage = `This user could not be deleted ${error.message}`;
     return res.status(status.error).send(errorMessage);
