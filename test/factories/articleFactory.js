@@ -5,8 +5,8 @@ const {Article} = require('../../models');
  * Generate an object which contains attributes needed
  * to successfully create a article instance.
  * 
- * @param {object} props Properties to use for article
- * @returns {} an object to build an article from
+ * @param {Object} props Properties to use for article
+ * @returns {Object} an object to build an article from
  */
 const data = async (props={})=>{
     const defaultProps= {
@@ -19,7 +19,9 @@ const data = async (props={})=>{
 /**
  * Generates an article instance from the properties provided.
  * 
- * @param {object} props properties to use for article
- * @returns {} a user instance
+ * @param {Object} props properties to use for article
+ * @returns {object} an article instance
  */
-module.exports = async (props={})=>{ Article.create(await data(props))};
+module.exports = async (props={})=>Article.create(await data(props));
+
+

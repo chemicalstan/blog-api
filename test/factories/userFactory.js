@@ -26,4 +26,7 @@ const {User} = require('../../models');
  * @return {Object}       A user instance
  */
 
- module.exports = async (props={})=>User.create(await data(props));
+ module.exports ={
+    userFactory: async (props={})=>User.create(await data(props)),
+    userInstance: async (props={})=>await data(prompt)
+ } 
